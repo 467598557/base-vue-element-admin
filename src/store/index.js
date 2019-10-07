@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import menu from './modules/menu'
-import breadcrumb from './modules/breadcrumb'
 import tab from './modules/tab'
 import user from './modules/user'
 
@@ -13,7 +12,6 @@ export default new Vuex.Store({
     actions: {},
     modules: {
         menu,
-        breadcrumb,
         tab,
         user
     }

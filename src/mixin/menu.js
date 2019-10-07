@@ -5,7 +5,7 @@ export default {
         Vue.mixin({
             computed: {
                 ...mapGetters({
-                    "$user": "user/user"
+                    "$curSecondMenu": "menu/curSecondMenu"
                 })
             }
         });

@@ -3,7 +3,7 @@
         <header id="header">
             <a href="javascript:void(0)" >LOGO</a>
             <span class="login-info">
-                当前登录：{{$data.$user.nickName}}
+                当前登录：{{$user.nickName}}
                 <a href="javascript:void(0)" @click="exit">退出</a>
             </span>
         </header>
@@ -17,8 +17,6 @@
             exit() {
                 this.$router.push(`/`);
             }
-        },
-        created() {
         }
     }
 </script>

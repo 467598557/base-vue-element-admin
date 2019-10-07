@@ -4,11 +4,11 @@ export default {
         list: []
     },
     mutations: {
-        UPDATE_TAB(state, item) {
+        UPDATE(state, item) {
             let list = state.list;
             for(let i=0, len=list.length; i<len; i++) {
                 let _item = list[i];
-                if(_item.ID == item.ID) {
+                if(_item.id == item.id) {
                     Object.assign(_item, item);
                     break;
                 }
@@ -17,7 +17,7 @@ export default {
         ADD(state, item) {
             let list = state.list;
             for(let i=0, len=list.length; i<len; i++) {
-                if(list[i].ID == item.ID) {
+                if(list[i].id == item.id) {
                     return false;
                 }
             }
@@ -27,7 +27,7 @@ export default {
         DELETE(state, item) {
             let list = state.list;
             for(let i=list.length-1; i>-1; i--) {
-                if(list[i].ID == item.ID) {
+                if(list[i].id == item.id) {
                     list.splice(i, 1);
                 }
             }

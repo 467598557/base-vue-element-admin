@@ -12,7 +12,7 @@ if(process.env.NODE_ENV == "development") {
     Vue.use(ElementUI);
 }
 
-Vue.config.productionTip = false;
+// Vue.config.productionTip = false;
 Vue.use(mixin);
 new Vue({
     store,

@@ -15,6 +15,11 @@ export default {
             state.user = user;
             localStorage.setItem(LocalstorageKey.Login_User_Info, JSON.stringify(user));
         }
+    },
+    getters: {
+        user(state) {
+            return state.user;
+        }
     }
 }
 

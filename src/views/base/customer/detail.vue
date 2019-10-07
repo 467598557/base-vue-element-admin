@@ -5,13 +5,13 @@
 </template>
 
 <script type="text/javascript" >
-    import RouterDist from '../RouterDist';
-
     export default {
         created() {
-            this.updateBreadcrumb([RouterDist.CustomerListWithPath, {
-                text: "客户1"
-            }]);
+            this.$updateTab({
+                id: this.$curSecondMenu.id,
+                path: '/dashboard/base/customer/detail?id=' + this.id,
+                text: "客户详情"
+            });
         }
     }
 </script>

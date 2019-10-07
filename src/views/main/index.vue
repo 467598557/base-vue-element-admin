@@ -1,6 +1,6 @@
 <template>
-    <section class="main-wrapper">
-        <ul>
+    <section class="main-wrapper" :class="[!curPrimaryMenu.children.length&&'no-second-menu']">
+        <ul>    
             <li class="primary-menu-list">
                 <ul>
                     <li v-for="item in menuList">
@@ -24,7 +24,7 @@
                     <div class="tab-list" ref="tagList">
                         <p class="tab-list-wrapper" ref="tagListWrapper">
                             <span :class="{active:curSecondMenu.id==item.id}"
-                                  @click="activeTabMenu(item)"
+                                  @click="initSecondMenuAndRouter(item)"
                                   v-for="item in tabList">
                                 {{item.text}}
                                 <a href="javascript:void(0)" v-if="tabList.length>1" @click="closeTabMenu(item)"
@@ -66,10 +66,19 @@
         },
         computed: {
             tabList() {
-                return [];
+                return this.$store.state.tab.list;
             },
             breadcrumbList() {
-                return this.$store.state.breadcrumb.list;
+                let matchedList = this.$route.matched.filter(e=> {
+                    return e.meta && e.meta.title;
+                });
+
+                return matchedList.map(e=> {
+                    return {
+                        text: e.meta.title,
+                        path: e.path
+                    }
+                });
             },
             menuList() {
                 return this.$store.state.menu.list;
@@ -78,8 +87,9 @@
         beforeMount() {
             if (this.$route.path === "/dashboard") {
                 this.changeMenu(this.menuList[0]);
+            } else {
+                this.getMenuByPath();
             }
-            this.getMenuByPath();
         },
         mounted() {
             window.addEventListener("resize", () => {
@@ -94,7 +104,9 @@
             },
             changeMenu(menu) {
                 this.curPrimaryMenu = menu;
-                if (!this.curSecondMenu.id) {
+                if(!menu.children.length) {
+                    this.initSecondMenuAndRouter(menu);
+                } else if(!this.curSecondMenu.id) {
                     this.changeSecondMenu(menu.children[0], menu);
                 }
             },
@@ -104,15 +116,17 @@
                 }
 
                 if (this.curSecondMenu != menu) {
-                    // this.$store.commit("tab/ADD", Object.assign({}, menu));
-                    this.activeTabMenu(menu);
+                    this.initSecondMenuAndRouter(menu);
                 }
             },
-            activeTabMenu(menu) {
-                this.curPrimaryMenu = menu.parent;
+            initSecondMenu(menu) {
+                this.curPrimaryMenu = menu.parent ? menu.parent : menu;
                 this.curSecondMenu = menu;
                 this.$store.commit("menu/SET_CUR_SECOND_MENU", this.curSecondMenu);
-
+                this.$store.commit("tab/ADD", Object.assign({}, menu));
+            },
+            initSecondMenuAndRouter(menu)    {
+                this.initSecondMenu(menu);
                 this.$router.push(menu.path);
             },
             closeTabMenu(menu) {
@@ -135,12 +149,20 @@
                     let children = menu.children || [];
                     for (let j = 0, jLen = children.length; j < jLen; j++) {
                         let childMenu = children[j];
-                        if (path.indexOf(childMenu.path) > -1) {
+                        if(path.indexOf(childMenu.path) > -1) {
                             childMenu.parent = menu;
-                            this.curSecondMenu = childMenu;
-                            this.curPrimaryMenu = menu;
-                            this.$store.commit("menu/SET_CUR_SECOND_MENU", this.curSecondMenu);
-                            this.$store.commit("tab/ADD", Object.assign({}, childMenu));
+                            this.initSecondMenu(childMenu);
+                            return;
+                        }
+                    }
+                }
+
+                if(!this.curSecondMenu.id) {
+                    for (let i = 0, len = menuList.length; i < len; i++) {
+                        let menu = menuList[i];
+                        if(menu.path && path.indexOf(menu.path) > -1) {
+                            menu.parent = menu;
+                            this.initSecondMenu(menu);
                             return;
                         }
                     }

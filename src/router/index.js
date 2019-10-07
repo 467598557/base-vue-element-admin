@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import BaseRouter from './modules/base'
+import SystemRouter from './modules/system'
 
 Vue.use(VueRouter);
 const router = new VueRouter({
@@ -19,7 +20,7 @@ const router = new VueRouter({
                 {
                     path: '',
                     component: () => import("views/main/index.vue"),
-                    children: BaseRouter
+                    children: BaseRouter.concat(SystemRouter)
                 }
             ]
         }, {

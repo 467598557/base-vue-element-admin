@@ -2,7 +2,7 @@
     <div >
         customer list
         <br/>
-        <router-link to="/dashboard/base/customer/detail/1">客户1</router-link>
+        <router-link to="/dashboard/base/customer/detail?id=1">客户1</router-link>
     </div>
 </template>
 
@@ -11,7 +11,6 @@
 
     export default {
         created() {
-            this.updateBreadcrumb([RouterDist.CustomerListWithoutPath]);
         }
     }
 </script>

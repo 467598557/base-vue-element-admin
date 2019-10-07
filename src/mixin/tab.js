@@ -2,8 +2,10 @@ export default {
     install(Vue) {
         Vue.mixin({
             methods: {
-                updateBreadcrumb(list) {
-                    this.$store.commit("breadcrumb/UPDATE", list);
+                $updateTab(item) {
+                    this.$store.commit("tab/UPDATE", item);
+
+                    return this;
                 }
             }
         });

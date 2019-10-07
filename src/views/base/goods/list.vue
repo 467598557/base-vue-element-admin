@@ -2,7 +2,7 @@
     <div >
         goods list
         <br/>
-        <router-link to="/dashboard/base/goods/detail/1">商品1</router-link>
+        <router-link to="/dashboard/base/goods/detail?id=1">商品1</router-link>
     </div>
 </template>
 
@@ -12,7 +12,6 @@
 
     export default {
         created() {
-            this.updateBreadcrumb([RouterDist.GoodsListWithoutPath]);
         }
     }
 </script>

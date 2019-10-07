@@ -1,10 +1,12 @@
 import User from './user';
-import Breadcrumb from './breadcrumb';
+import Tab from './tab';
+import Menu from './menu';
 
 export default {
     install(Vue) {
-        [User, Breadcrumb].forEach(item=> {
+        [User, Tab, Menu].forEach(item=> {
             Vue.use(item);
         });
     }
 }
+

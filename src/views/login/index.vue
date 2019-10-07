@@ -57,76 +57,54 @@
                     if (valid) {
                         this.logining = true;
 
-                        setTimeout(()=> {
+                        setTimeout(() => {
                             this.$store.commit("user/UPDATE", {
                                 accountName: "admin",
                                 nickName: "管理员"
                             });
                             this.$store.commit("menu/UPDATE", [
-                                    {
-                                        id: 1,
-                                        text: "基本",
-                                        path: "",
-                                        children: [{
-                                            id: 11,
-                                            text: "商品信息",
-                                            path: "/dashboard/base/goods"
-                                        }, {
-                                            id: 12,
-                                            text: "客户信息",
-                                            path: "/dashboard/base/customer"
-                                        }]
+                                {
+                                    id: 1,
+                                    text: "基本",
+                                    path: "",
+                                    children: [{
+                                        id: 11,
+                                        text: "商品管理",
+                                        path: "/dashboard/base/goods"
                                     }, {
-                                        id: 2,
-                                        text: "库存",
-                                        children: [
-                                            {
-                                                id: 21,
-                                                text: "盘点信息"
-                                            }, {
-                                                id: 22,
-                                                text: "库存信息"
-                                            }
-                                        ]
+                                        id: 12,
+                                        text: "客户管理",
+                                        path: "/dashboard/base/customer"
+                                    }]
+                                }, {
+                                    id: 2,
+                                    text: "库存",
+                                    children: [{
+                                        id: 22,
+                                        text: "库存管理",
+                                        path: "/dashboard/stock"
+                                    }]
+                                }, {
+                                    id: 3,
+                                    text: "财务",
+                                    children: [{
+                                        id: 31,
+                                        text: "收款单管理"
                                     }, {
-                                        id: 3,
-                                        text: "采购",
-                                        children: [
-                                            {
-                                                id: 31,
-                                                text: "采购信息"
-                                            }
-                                        ]
+                                        id: 32,
+                                        text: "付款单管理"
                                     }, {
-                                        id: 4,
-                                        text: "销售",
-                                        children: [{
-                                            id: 41,
-                                            text: "销售信息"
-                                        }]
-                                    }, {
-                                        id: 5,
-                                        text: "财务",
-                                        children: [{
-                                            id: 41,
-                                            text: "财务总计"
-                                        }]
-                                    }, {
-                                        id: 6,
-                                        text: "系统",
-                                        children: [{
-                                            id: 41,
-                                            text: "系统设置"
-                                        }]
-                                    }, {
-                                        id: 7,
-                                        text: "数据",
-                                        children: [{
-                                            id: 41,
-                                            text: "数据信息"
-                                        }]
-                                    }
-                                ]);
+                                        id: 33,
+                                        text: "转账单管理"
+                                    }]
+                                }, {
+                                    id: 4,
+                                    text: "系统",
+                                    path: "/dashboard/system",
+                                    children: []
+                                }
+                            ]);
+
                             this.$router.push('/dashboard');
                         }, 1000);
                     } else {
@@ -147,11 +125,13 @@
         background-size: 100% 100%;
         padding-top: 180px;
         box-sizing: border-box;
+
         .title {
             text-align: center;
             font-size: 20px;
             margin-bottom: 15px;
         }
+
         .login-page {
             -webkit-border-radius: 5px;
             border-radius: 5px;
@@ -162,6 +142,7 @@
             border: 1px solid #eaeaea;
             box-shadow: 0 0 25px #cac6c6;
         }
+
         label.el-checkbox.rememberme {
             margin: 0px 0px 15px;
             text-align: left;

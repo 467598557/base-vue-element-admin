@@ -30,6 +30,9 @@ export default {
                     return menu.children;
                 }
             }
+        },
+        curSecondMenu(state) {
+            return state.curSecondMenu;
         }
     }
 }

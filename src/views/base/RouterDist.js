@@ -1,5 +1,5 @@
-const GoodsListPath = "/dashboard/base/goods";
-const CustomerListPath = "/dashboard/base/customer";
+const GoodsListPath = "/dashboard/base/goods/list";
+const CustomerListPath = "/dashboard/base/customer/list";
 
 export default {
     GoodsListWithoutPath: {
