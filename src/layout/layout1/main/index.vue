@@ -1,6 +1,6 @@
 <template>
     <section class="main-wrapper" :class="[!curPrimaryMenu.children.length&&'no-second-menu']">
-        <ul>    
+        <ul>
             <li class="primary-menu-list">
                 <ul>
                     <li v-for="item in menuList">
@@ -184,5 +184,5 @@
 </script>
 
 <style type="text/css" lang="less">
-    @import "index";
+    @import "./index";
 </style>

@@ -14,7 +14,7 @@ if(IsProd) {
 }
 
 module.exports = {
-    baseUrl: IsProd ? (IsForTest ? "/testmcs" : "/mcs") : "./",
+    baseUrl: IsProd ? "/" : "./",
     configureWebpack: {
         devtool: IsProd ? '' : 'inline-source-map',
         resolve: {
@@ -38,10 +38,10 @@ module.exports = {
             entry: 'src/main.js',
             template: 'public/index.html',
             filename: 'index.html',
-            commonText: `
+            commonText: `    
                 <script src="https://lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script>
             `,
-            propText: IsProd ? `
+            propText: IsProd ? `    
                 <script src="https://lib.baomitu.com/vue/2.5.21/vue.min.js"></script>
                 <script src="https://lib.baomitu.com/vue-router/3.0.2/vue-router.min.js"></script>
                 <script src="https://lib.baomitu.com/element-ui/2.4.11/index.js"></script>
@@ -52,6 +52,21 @@ module.exports = {
             ` : ''
         }
     },
-    productionSourceMap: IsProd
+    productionSourceMap: IsProd,
+    chainWebpack: config=> {
+        const oneOfsMap = config.module.rule('less').oneOfs.store;
+        oneOfsMap.forEach(item => {
+            item
+                .use('sass-resources-loader')
+                .loader('sass-resources-loader')
+                .options({
+                    resources: [
+                        './src/assets/less/utils/function.less',
+                        './src/assets/less/utils/variable.less'
+                    ]
+                })
+                .end();
+        });
+    }
 }
 

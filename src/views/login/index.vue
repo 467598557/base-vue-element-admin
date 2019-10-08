@@ -117,8 +117,6 @@
 </script>
 
 <style type="text/css" lang="less" scoped>
-    @import (reference) '../../assets/less/utils/index';
-
     #loginView {
         .rect;
         background: url(../../assets/bg.jpg) no-repeat center center;

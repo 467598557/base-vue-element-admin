@@ -19,7 +19,7 @@ const router = new VueRouter({
             children: [
                 {
                     path: '',
-                    component: () => import("views/main/index.vue"),
+                    component: () => import("@/layout/layout1/main/index.vue"),
                     children: BaseRouter.concat(SystemRouter)
                 }
             ]
